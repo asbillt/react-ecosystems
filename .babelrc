@@ -1,0 +1,6 @@
+// The .babelrc file tells the babel transpiler what presets and plugins to use to transpile the code.
+// preset-env: Handles the transformation of ES6 into common JS.
+// preset-react: Handles the JSX, the HTML5 in the JavaScript files.
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
