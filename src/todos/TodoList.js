@@ -6,13 +6,14 @@ import { connect } from "react-redux";
 import NewTodoForm from "./NewTodoForm";
 // Import TodoListItem.
 import TodoListItem from "./TodoListItem";
-import { removeTodo } from "./actions";
+// Import the removeTodo and markTodoAsCompleted functions from actions.js.
+import { removeTodo, markTodoAsCompleted } from "./actions";
 // Import styling.
 import "./TodoList.css";
 
 // Create TodoList component.
-// Destructure the todos property.
-const TodoList = ({ todos = [], onRemovePressed }) => {
+// Destructure the todos, onRemovePressed and onCompletedPressed properties.
+const TodoList = ({ todos = [], onRemovePressed, onCompletedPressed }) => {
   return (
     <div className="list-wrapper">
       <NewTodoForm />
@@ -21,7 +22,11 @@ const TodoList = ({ todos = [], onRemovePressed }) => {
         // Pass each todo item into the TodoListItem component
         // through the components' todo property.
         todos.map((todo) => (
-          <TodoListItem todo={todo} onRemovePressed={onRemovePressed} />
+          <TodoListItem
+            todo={todo}
+            onRemovePressed={onRemovePressed}
+            onCompletedPressed={onCompletedPressed}
+          />
         ))
       }
     </div>
@@ -41,7 +46,11 @@ const mapStateToProps = (state) => ({
 // The properties of the object returned will be passed to the component as props.
 const mapDispatchToProps = (dispatch) => ({
   // Pass the TodoList component the onRemovePressed property.
+  // Dispatch the todo item text to the removeTodo Redux Action in actions.js.
   onRemovePressed: (text) => dispatch(removeTodo(text)),
+  // Pass the TodoList component the onCompletedPressed property.
+  // Dispatch the todo item text to the markTodoAsCompleted Redux Action in actions.js.
+  onCompletedPressed: (text) => dispatch(markTodoAsCompleted(text)),
 });
 
 // Connect NewTodoForm to Redux store.
