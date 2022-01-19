@@ -32,4 +32,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Create a Redux Store that holds the complete state tree of the app.
 // Pass the persisting reducer, persistedReducer, to the Redux Store.
-export const configureStore = () => createStore(persistedReducer);
+// Add devtools as second argument to allow seeing state of store in browser.
+export const configureStore = () =>
+  createStore(
+    persistedReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
