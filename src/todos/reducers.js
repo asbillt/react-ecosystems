@@ -9,7 +9,7 @@
 */
 
 // Import the action types from actions.js.
-import { CREATE_TODO, REMOVE_TODO } from "./actions";
+import { CREATE_TODO, REMOVE_TODO, MARK_TODO_AS_COMPLETED } from "./actions";
 
 // Create the todos reducer.
 export const todos = (state = [], action) => {
@@ -39,6 +39,21 @@ export const todos = (state = [], action) => {
       // Filter a new array of todo items that do not match the text
       // of the todo item the user is removing and return the new array.
       return state.filter((todo) => todo.text !== text);
+    }
+    // Use the MARK_TODO_AS_COMPLETED case when the type is MARK_TODO_AS_COMPLETED.
+    case MARK_TODO_AS_COMPLETED: {
+      // Destructure the text from the payload property.
+      const { text } = payload;
+      // Map through the state array.
+      // For reach todo item, check if the text of each todo item is the same
+      // as the text of the completed todo item and if it is set isCompleted to true.
+      // Otherwise return the same state of todo.
+      return state.map((todo) => {
+        if (todo.text === text) {
+          return { ...todo, isCompleted: true };
+        }
+        return todo;
+      });
     }
     // Default case.
     // If the action triggered does not match the cases then return
