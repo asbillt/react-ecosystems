@@ -68,6 +68,7 @@ const mapStateToProps = (state) => ({
 // The properties of the object returned will be passed to the component as props.
 const mapDispatchToProps = (dispatch) => ({
   // Pass the NewTodoForm component the onCreatePressed property.
+  // Dispatch the new todo item text to the createTodo Redux Action in actions.js.
   onCreatePressed: (text) => dispatch(createTodo(text)),
 });
 
