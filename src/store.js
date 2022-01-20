@@ -1,9 +1,11 @@
-// Import the createStore and combineReducers functions from the redux library.
-import { createStore, combineReducers } from "redux";
+// Import the createStore, combineReducers and applyMiddleware functions from the redux library.
+import { createStore, combineReducers, applyMiddleware } from "redux";
 // Import persistReducer, storage and autoMergeLevel2 from the redux-persist library.
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 // Import the todos reducers.
 import { todos } from "./todos/reducers";
 
@@ -34,7 +36,4 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Pass the persisting reducer, persistedReducer, to the Redux Store.
 // Add devtools as second argument to allow seeing state of store in browser.
 export const configureStore = () =>
-  createStore(
-    persistedReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
+  createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
