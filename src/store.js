@@ -6,14 +6,15 @@ import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-// Import the todos reducers.
-import { todos } from "./todos/reducers";
+// Import reducers.
+import { todos, isLoading } from "./todos/reducers";
 
 // Create a reducers object that contains reducers imported from
 // the reducers.js file.
 // The todos is an array of the updated state of the UI's todo list.
 const reducers = {
   todos,
+  isLoading,
 };
 
 // Create a State Reconciler to define how incoming state is merged in
