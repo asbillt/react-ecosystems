@@ -1,20 +1,37 @@
-// Import the core React library.
-import React from "react";
+// Import the core React library and the useEffect hook.
+import React, { useEffect } from "react";
 // Import connect from the react-redux package.
 // The connect function connects a React component to a Redux store.
 import { connect } from "react-redux";
+// Import the NewTodoForm component from NewTodoForm.js.
 import NewTodoForm from "./NewTodoForm";
-// Import TodoListItem.
+// Import the TodoListItem component from TodoListItem.js.
 import TodoListItem from "./TodoListItem";
+// Import the loadTodos thunk from thunks.js.
+import { loadTodos } from "./thunks";
 // Import the removeTodo and markTodoAsCompleted functions from actions.js.
 import { removeTodo, markTodoAsCompleted } from "./actions";
 // Import styling.
 import "./TodoList.css";
 
 // Create TodoList component.
-// Destructure the todos, onRemovePressed and onCompletedPressed properties.
-const TodoList = ({ todos = [], onRemovePressed, onCompletedPressed }) => {
-  return (
+// Destructure the todos, onRemovePressed, onCompletedPressed, isLoading and startLoadingTodos properties.
+const TodoList = ({
+  todos = [],
+  onRemovePressed,
+  onCompletedPressed,
+  isLoading,
+  startLoadingTodos,
+}) => {
+  // Fire the useEffect hook on initial render of the TodoList component.
+  // 1st argument: Make a function call to startLoadingTodos.
+  // 2nd argument: Empty dependency array so useEffect only fires on initial render.
+  useEffect(() => {
+    startLoadingTodos();
+  }, []);
+  // Display the "Loading todos..." message while the app is loading the todos.
+  const loadingMessage = <div>Loading todos...</div>;
+  const content = (
     <div className="list-wrapper">
       <NewTodoForm />
       {
@@ -31,13 +48,19 @@ const TodoList = ({ todos = [], onRemovePressed, onCompletedPressed }) => {
       }
     </div>
   );
+  // If isLoading is true return loadingMessage otherwise return content.
+  return isLoading ? loadingMessage : content;
 };
 
-// The state argument passed is an object representing the entire redux state.
+// mapStateToProps is used for selecting the part of the data from the store that
+// the connected component needs. It is called every time the store state changes.
+// The state argument passed is an object representing the entire redux state (the updated state).
 // The mapStateToProps will take the state object and return another object containing
 // the pieces of that state that our component needs access to.
 const mapStateToProps = (state) => ({
-  // Return an object with todos property and value of state.todos.
+  // Return the isLoading property with a value of either true or false for state.isLoading.
+  isLoading: state.isLoading,
+  // Return the todos property with the value of state.todos.
   todos: state.todos,
 });
 
@@ -45,6 +68,8 @@ const mapStateToProps = (state) => ({
 // actions that the Redux store will respond to.
 // The properties of the object returned will be passed to the component as props.
 const mapDispatchToProps = (dispatch) => ({
+  // Dispatch the loadTodos thunk when its called by the useEffect hook (on initial render of TodoList).
+  startLoadingTodos: () => dispatch(loadTodos()),
   // Pass the TodoList component the onRemovePressed property.
   // Dispatch the todo item text to the removeTodo Redux Action in actions.js.
   onRemovePressed: (text) => dispatch(removeTodo(text)),
@@ -53,6 +78,6 @@ const mapDispatchToProps = (dispatch) => ({
   onCompletedPressed: (text) => dispatch(markTodoAsCompleted(text)),
 });
 
-// Connect NewTodoForm to Redux store.
+// Connect TodoList component to Redux store.
 // Component to connect is added in second parentheses.
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
