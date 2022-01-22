@@ -89,6 +89,13 @@ export const todos = (state = [], action) => {
         return todo;
       });
     }
+    // This case will load the todos list from the node server.
+    case LOAD_TODOS_SUCCESS: {
+      const { todos } = payload;
+      return todos;
+    }
+    case LOAD_TODOS_IN_PROGRESS:
+    case LOAD_TODOS_FAILURE:
     // Default case.
     // If the action triggered does not match the cases then return
     // the unchanged state as it currently is.
