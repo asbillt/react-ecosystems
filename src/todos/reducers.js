@@ -54,17 +54,10 @@ export const todos = (state = [], action) => {
   switch (type) {
     // Use the CREATE_TODO case when the type is CREATE_TODO.
     case CREATE_TODO: {
-      // Destructure the text from the payload property.
-      const { text } = payload;
-      // Create an object, newTodo.
-      // Store the text as a property in the object.
-      // The text is what the user typed into the input field (the todo item).
-      const newTodo = {
-        text,
-        isCompleted: false,
-      };
-      // Add the new todo item to the end of the current todo list array, then return it.
-      return state.concat(newTodo);
+      // Destructure the todo from the payload property.
+      const { todo } = payload;
+      // Add the new todo to the end of the current todo list array, then return it.
+      return state.concat(todo);
     }
     // Use the REMOVE_TODO case when the type is REMOVE_TODO.
     case REMOVE_TODO: {
