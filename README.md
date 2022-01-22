@@ -29,6 +29,7 @@ A React Redux Application built to keep track of todo items. Todo items can be c
 │   │   ├── NewTodoForm.css
 │   │   ├── NewTodoForm.js
 │   │   ├── reducers.js
+│   │   ├── thunks.js
 │   │   ├── TodoList.css
 │   │   ├── TodoList.js
 │   │   ├── TodoListItem.css
