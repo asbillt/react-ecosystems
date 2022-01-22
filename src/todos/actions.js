@@ -6,13 +6,13 @@ export const CREATE_TODO = "CREATE_TODO";
 // Define a createTodo action that the app will fire
 // whenever the user types something into the NewTodoForm
 // component and presses the Create Todo button.
-export const createTodo = (text) =>
+export const createTodo = (todo) =>
   // Returns an abstract object.
   ({
     // The type property assigned the CREATE_TODO constant as its value.
     type: CREATE_TODO,
-    // The payload property assigned the text of the new todo.
-    payload: { text },
+    // The payload property assigned the new todo.
+    payload: { todo },
   });
 
 // Define the constant for the actions type, REMOVE_TODO.
