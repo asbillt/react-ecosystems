@@ -5,12 +5,13 @@ which contains the logic the app will perform when the thunk is triggered.
 
 // Import the 3 "loading" action creators.
 import {
+  createTodo,
   loadTodosInProgress,
   loadTodosSuccess,
   loadTodosFailure,
 } from "./actions";
 
-// Create the loadTodos thunk.
+// Define the loadTodos thunk.
 // loadTodos won't take any arguments.
 // loadTodos will return an async function.
 // Two arguments passed to async function when loadTodos thunk is triggered.
@@ -32,6 +33,39 @@ export const loadTodos = () => async (dispatch, getState) => {
     dispatch(loadTodosSuccess(todos));
   } catch (e) {
     dispatch(loadTodosFailure());
+    dispatch(displayAlert(e));
+  }
+};
+
+// Define the addTodoRequest thunk.
+// addTodoRequest will have the text parameter.
+// addTodoRequest will return an async function.
+// dispatch argument passed to the async function when addTodoRequest is triggered.
+// dispatch: Used to dispatch other redux actions from inside the addTodoRequest thunk.
+export const addTodoRequest = (text) => async (dispatch) => {
+  // Use a try catch block to handle any cases where the fetching doesn't work.
+  // Any errors during the fetch operation are passed into the catch block.
+  try {
+    // Convert text to a JSON string and store it in the constant body.
+    const body = JSON.stringify({ text });
+    // Make fetch request to the todos endpoint and store the response in the response constant.
+    // Await: Don't run the next line of code until the promise is fulfilled.
+    const response = await fetch("http://localhost:8080/todos", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Make fetch send a post request instead of a get request.
+      method: "post",
+      // Include the request body.
+      body,
+    });
+    // Takes the JSON in the response and resolves it to a JavaScript object
+    // that is stored in the todo constant.
+    // Await: Don't run the next line of code until the promise is fulfilled.
+    const todo = await response.json();
+    // Dispatch the createTodo Redux action with the todo from the response.
+    dispatch(createTodo(todo));
+  } catch (e) {
     dispatch(displayAlert(e));
   }
 };
