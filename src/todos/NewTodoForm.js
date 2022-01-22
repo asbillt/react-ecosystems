@@ -4,8 +4,8 @@ import React, { useState } from "react";
 // Import connect from the react-redux package.
 // The connect function connects a React component to a Redux store.
 import { connect } from "react-redux";
-// Import the createTodo Redux action.
-import { createTodo } from "./actions";
+// Import addTodoRequest from thunks.js.
+import { addTodoRequest } from "./thunks";
 // Import styling.
 import "./NewTodoForm.css";
 
@@ -69,7 +69,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   // Pass the NewTodoForm component the onCreatePressed property.
   // Dispatch the new todo item text to the createTodo Redux Action in actions.js.
-  onCreatePressed: (text) => dispatch(createTodo(text)),
+  onCreatePressed: (text) => dispatch(addTodoRequest(text)),
 });
 
 // Connect NewTodoForm to Redux store.
