@@ -26,8 +26,8 @@ const TodoListItem = ({ todo, onRemovePressed, onCompletedPressed }) => {
         }
         <button
           // On click, call the onRemovePressed function with the value of
-          // todo.text as the argument.
-          onClick={() => onRemovePressed(todo.text)}
+          // todo.id as the argument.
+          onClick={() => onRemovePressed(todo.id)}
           className="remove-button"
         >
           Remove

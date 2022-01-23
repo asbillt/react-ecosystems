@@ -8,9 +8,9 @@ import NewTodoForm from "./NewTodoForm";
 // Import the TodoListItem component from TodoListItem.js.
 import TodoListItem from "./TodoListItem";
 // Import the loadTodos thunk from thunks.js.
-import { loadTodos } from "./thunks";
+import { loadTodos, removeTodoRequest } from "./thunks";
 // Import the removeTodo and markTodoAsCompleted functions from actions.js.
-import { removeTodo, markTodoAsCompleted } from "./actions";
+import { markTodoAsCompleted } from "./actions";
 // Import styling.
 import "./TodoList.css";
 
@@ -71,8 +71,8 @@ const mapDispatchToProps = (dispatch) => ({
   // Dispatch the loadTodos thunk when its called by the useEffect hook (on initial render of TodoList).
   startLoadingTodos: () => dispatch(loadTodos()),
   // Pass the TodoList component the onRemovePressed property.
-  // Dispatch the todo item text to the removeTodo Redux Action in actions.js.
-  onRemovePressed: (text) => dispatch(removeTodo(text)),
+  // Dispatch the todo item's id to the removeTodoRequest thunk in thunks.js.
+  onRemovePressed: (id) => dispatch(removeTodoRequest(id)),
   // Pass the TodoList component the onCompletedPressed property.
   // Dispatch the todo item text to the markTodoAsCompleted Redux Action in actions.js.
   onCompletedPressed: (text) => dispatch(markTodoAsCompleted(text)),
