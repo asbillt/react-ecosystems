@@ -7,6 +7,7 @@ which contains the logic the app will perform when the thunk is triggered.
 import {
   createTodo,
   removeTodo,
+  markTodoAsCompleted,
   loadTodosInProgress,
   loadTodosSuccess,
   loadTodosFailure,
@@ -92,6 +93,35 @@ export const removeTodoRequest = (id) => async (dispatch) => {
     const removedTodo = await response.json();
     // Dispatch the removeTodo Redux action with the todo from the response.
     dispatch(removeTodo(removedTodo));
+  } catch (e) {
+    dispatch(displayAlert(e));
+  }
+};
+
+// Define the markTodoAsCompletedRequest thunk.
+// markTodoAsCompletedRequest will have the id parameter.
+// markTodoAsCompletedRequest will return an async function.
+// dispatch argument passed to the async function when markTodoAsCompletedRequest is triggered.
+// dispatch: Used to dispatch other redux actions from inside the markTodoAsCompletedRequest thunk.
+export const markTodoAsCompletedRequest = (id) => async (dispatch) => {
+  // Use a try catch block to handle any cases where the fetching doesn't work.
+  // Any errors during the fetch operation are passed into the catch block.
+  try {
+    // Make fetch request to the todos/id/completed endpoint and store the updated todo in the response constant.
+    // Await: Don't run the next line of code until the promise is fulfilled.
+    const response = await fetch(
+      `http://localhost:8080/todos/${id}/completed`,
+      {
+        // Make fetch send a post request instead of a get request.
+        method: "post",
+      }
+    );
+    // Takes the JSON in the response and resolves it to a JavaScript object
+    // that is stored in the todo constant.
+    // Await: Don't run the next line of code until the promise is fulfilled.
+    const updatedTodo = await response.json();
+    // Dispatch the markTodoAsCompleted Redux action with the updated todo from the response.
+    dispatch(markTodoAsCompleted(updatedTodo));
   } catch (e) {
     dispatch(displayAlert(e));
   }
