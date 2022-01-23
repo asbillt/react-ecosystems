@@ -20,13 +20,13 @@ export const REMOVE_TODO = "REMOVE_TODO";
 // 2nd action creator:
 // Define a removeTodo action that the app will fire
 // whenever the user deletes a todo item.
-export const removeTodo = (text) =>
+export const removeTodo = (todo) =>
   // Returns an abstract object.
   ({
     // The type property assigned the REMOVE_TODO constant as its value.
     type: REMOVE_TODO,
-    // The payload property assigned the text of the todo the app should remove.
-    payload: { text },
+    // The payload property assigned the todo the app should remove.
+    payload: { todo },
   });
 
 // Define the constant for the actions type, MARK_TODO_AS_COMPLETED.
