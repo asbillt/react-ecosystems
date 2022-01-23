@@ -8,9 +8,11 @@ import NewTodoForm from "./NewTodoForm";
 // Import the TodoListItem component from TodoListItem.js.
 import TodoListItem from "./TodoListItem";
 // Import the loadTodos thunk from thunks.js.
-import { loadTodos, removeTodoRequest } from "./thunks";
-// Import the removeTodo and markTodoAsCompleted functions from actions.js.
-import { markTodoAsCompleted } from "./actions";
+import {
+  loadTodos,
+  removeTodoRequest,
+  markTodoAsCompletedRequest,
+} from "./thunks";
 // Import styling.
 import "./TodoList.css";
 
@@ -74,8 +76,8 @@ const mapDispatchToProps = (dispatch) => ({
   // Dispatch the todo item's id to the removeTodoRequest thunk in thunks.js.
   onRemovePressed: (id) => dispatch(removeTodoRequest(id)),
   // Pass the TodoList component the onCompletedPressed property.
-  // Dispatch the todo item text to the markTodoAsCompleted Redux Action in actions.js.
-  onCompletedPressed: (text) => dispatch(markTodoAsCompleted(text)),
+  // Dispatch the todo item id to the markTodoAsCompletedRequest thunk in thunks.js.
+  onCompletedPressed: (id) => dispatch(markTodoAsCompletedRequest(id)),
 });
 
 // Connect TodoList component to Redux store.

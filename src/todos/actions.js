@@ -34,13 +34,13 @@ export const MARK_TODO_AS_COMPLETED = "MARK_TODO_AS_COMPLETED";
 // 3rd action creator:
 // Define a markTodoAsCompleted action that the app will fire
 // whenever the user clicks the Mark As Completed button for a todo item.
-export const markTodoAsCompleted = (text) =>
+export const markTodoAsCompleted = (todo) =>
   // Returns an abstract object.
   ({
     // The type property assigned the MARK_TODO_AS_COMPLETED constant as its value.
     type: MARK_TODO_AS_COMPLETED,
-    // The payload property assigned the text of the completed todo.
-    payload: { text },
+    // The payload property assigned the todo of the completed todo.
+    payload: { todo },
   });
 
 // Define the constant for the actions type, LOAD_TODOS_IN_PROGRESS.

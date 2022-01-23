@@ -16,8 +16,8 @@ const TodoListItem = ({ todo, onRemovePressed, onCompletedPressed }) => {
           todo.isCompleted ? null : (
             <button
               // On click, call the onCompletedPressed function with the value of
-              // todo.text as the argument.
-              onClick={() => onCompletedPressed(todo.text)}
+              // todo.id as the argument.
+              onClick={() => onCompletedPressed(todo.id)}
               className="completed-button"
             >
               Mark As Completed

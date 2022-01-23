@@ -61,7 +61,7 @@ export const todos = (state = [], action) => {
     }
     // Use the REMOVE_TODO case when the type is REMOVE_TODO.
     case REMOVE_TODO: {
-      // Destructure the text from the payload property and rename it todoToRemove.
+      // Destructure the todo from the payload property and rename it todoToRemove.
       const { todo: todoToRemove } = payload;
       // Filter a new array of todo items that do not match the id
       // of the todo item the user is removing and return the new array.
@@ -69,15 +69,15 @@ export const todos = (state = [], action) => {
     }
     // Use the MARK_TODO_AS_COMPLETED case when the type is MARK_TODO_AS_COMPLETED.
     case MARK_TODO_AS_COMPLETED: {
-      // Destructure the text from the payload property.
-      const { text } = payload;
+      // Destructure the todo from the payload property and rename it updatedTodo.
+      const { todo: updatedTodo } = payload;
       // Map through the state array.
-      // For reach todo item, check if the text of each todo item is the same
-      // as the text of the completed todo item and if it is set isCompleted to true.
+      // For each todo item, check if the id of each todo item is the same
+      // as the id of the updated todo item and if it is return the updated todo.
       // Otherwise return the same state of todo.
       return state.map((todo) => {
-        if (todo.text === text) {
-          return { ...todo, isCompleted: true };
+        if (todo.id === updatedTodo.id) {
+          return updatedTodo;
         }
         return todo;
       });
