@@ -61,11 +61,11 @@ export const todos = (state = [], action) => {
     }
     // Use the REMOVE_TODO case when the type is REMOVE_TODO.
     case REMOVE_TODO: {
-      // Destructure the text from the payload property.
-      const { text } = payload;
-      // Filter a new array of todo items that do not match the text
+      // Destructure the text from the payload property and rename it todoToRemove.
+      const { todo: todoToRemove } = payload;
+      // Filter a new array of todo items that do not match the id
       // of the todo item the user is removing and return the new array.
-      return state.filter((todo) => todo.text !== text);
+      return state.filter((todo) => todo.id !== todoToRemove.id);
     }
     // Use the MARK_TODO_AS_COMPLETED case when the type is MARK_TODO_AS_COMPLETED.
     case MARK_TODO_AS_COMPLETED: {
