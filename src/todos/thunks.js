@@ -6,6 +6,7 @@ which contains the logic the app will perform when the thunk is triggered.
 // Import the 3 "loading" action creators.
 import {
   createTodo,
+  removeTodo,
   loadTodosInProgress,
   loadTodosSuccess,
   loadTodosFailure,
@@ -24,7 +25,7 @@ export const loadTodos = () => async (dispatch, getState) => {
     // When the load todos thunk is triggered, dispatch the loadTodosInProgress action.
     dispatch(loadTodosInProgress());
     // Make a fetch request to the node server.
-    const response = await fetch("http://localhost:8080/todos-delay");
+    const response = await fetch("http://localhost:8080/todos");
     // Parse the the data from the server response into a JSON object.
     const todos = await response.json();
 
@@ -65,6 +66,32 @@ export const addTodoRequest = (text) => async (dispatch) => {
     const todo = await response.json();
     // Dispatch the createTodo Redux action with the todo from the response.
     dispatch(createTodo(todo));
+  } catch (e) {
+    dispatch(displayAlert(e));
+  }
+};
+
+// Define the removeTodoRequest thunk.
+// removeTodoRequest will have the id parameter.
+// removeTodoRequest will return an async function.
+// dispatch argument passed to the async function when removeTodoRequest is triggered.
+// dispatch: Used to dispatch other redux actions from inside the removeTodoRequest thunk.
+export const removeTodoRequest = (id) => async (dispatch) => {
+  // Use a try catch block to handle any cases where the fetching doesn't work.
+  // Any errors during the fetch operation are passed into the catch block.
+  try {
+    // Make fetch request to the todos/id endpoint and store the response in the response constant.
+    // Await: Don't run the next line of code until the promise is fulfilled.
+    const response = await fetch(`http://localhost:8080/todos/${id}`, {
+      // Make fetch send a delete request instead of a get request.
+      method: "delete",
+    });
+    // Takes the JSON in the response and resolves it to a JavaScript object
+    // that is stored in the todo constant.
+    // Await: Don't run the next line of code until the promise is fulfilled.
+    const removedTodo = await response.json();
+    // Dispatch the removeTodo Redux action with the todo from the response.
+    dispatch(removeTodo(removedTodo));
   } catch (e) {
     dispatch(displayAlert(e));
   }
