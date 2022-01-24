@@ -4,6 +4,8 @@ import React, { useState } from "react";
 // Import connect from the react-redux package.
 // The connect function connects a React component to a Redux store.
 import { connect } from "react-redux";
+// Import selector.
+import { getTodos } from "./selectors";
 // Import addTodoRequest from thunks.js.
 import { addTodoRequest } from "./thunks";
 // Import styling.
@@ -59,8 +61,8 @@ const NewTodoForm = ({ todos, onCreatePressed }) => {
 // The mapStateToProps will take the state object and return another object containing
 // the pieces of that state that our component needs access to.
 const mapStateToProps = (state) => ({
-  // Return an object with todos property and value of state.todos.
-  todos: state.todos,
+  // Call the getTodos selector, pass state object in as argument.
+  todos: getTodos(state),
 });
 
 // The dispatch argument is a function that allows the components to trigger
