@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import NewTodoForm from "./NewTodoForm";
 // Import the TodoListItem component from TodoListItem.js.
 import TodoListItem from "./TodoListItem";
+// Import selectors.
+import { getTodos, getTodosLoading } from "./selectors";
 // Import the loadTodos thunk from thunks.js.
 import {
   loadTodos,
@@ -60,10 +62,10 @@ const TodoList = ({
 // The mapStateToProps will take the state object and return another object containing
 // the pieces of that state that our component needs access to.
 const mapStateToProps = (state) => ({
-  // Return the isLoading property with a value of either true or false for state.isLoading.
-  isLoading: state.isLoading,
-  // Return the todos property with the value of state.todos.
-  todos: state.todos,
+  // Call the getTodosLoading selector, pass state object in as argument.
+  isLoading: getTodosLoading(state),
+  // Call the getTodos selector, pass state object in as argument.
+  todos: getTodos(state),
 });
 
 // The dispatch argument is a function that allows the components to trigger
