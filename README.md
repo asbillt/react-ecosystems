@@ -1,6 +1,6 @@
 # Todo List App
 
-A React Redux Application built to keep track of todo items. Todo items can be created, removed or marked as completed.
+A React Redux Application built to keep track of incomplete and completed todo items. Todo items can be created, removed or marked as completed.
 
 # Tech Used
 
@@ -29,6 +29,7 @@ A React Redux Application built to keep track of todo items. Todo items can be c
 │   │   ├── NewTodoForm.css
 │   │   ├── NewTodoForm.js
 │   │   ├── reducers.js
+│   │   ├── selectors.js
 │   │   ├── thunks.js
 │   │   ├── TodoList.css
 │   │   ├── TodoList.js
