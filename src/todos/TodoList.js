@@ -8,7 +8,11 @@ import NewTodoForm from "./NewTodoForm";
 // Import the TodoListItem component from TodoListItem.js.
 import TodoListItem from "./TodoListItem";
 // Import selectors.
-import { getTodos, getTodosLoading } from "./selectors";
+import {
+  getTodosLoading,
+  getCompletedTodos,
+  getIncompleteTodos,
+} from "./selectors";
 // Import the loadTodos thunk from thunks.js.
 import {
   loadTodos,
@@ -19,9 +23,10 @@ import {
 import "./TodoList.css";
 
 // Create TodoList component.
-// Destructure the todos, onRemovePressed, onCompletedPressed, isLoading and startLoadingTodos properties.
+// Destructure the completedTodos, incompleteTodos, onRemovePressed, onCompletedPressed, isLoading and startLoadingTodos properties.
 const TodoList = ({
-  todos = [],
+  completedTodos,
+  incompleteTodos,
   onRemovePressed,
   onCompletedPressed,
   isLoading,
@@ -38,11 +43,25 @@ const TodoList = ({
   const content = (
     <div className="list-wrapper">
       <NewTodoForm />
+      <h3>Incomplete:</h3>
       {
-        // Map through each todo item in the todos property.
+        // Map through each todo item in the incompleteTodos property.
         // Pass each todo item into the TodoListItem component
         // through the components' todo property.
-        todos.map((todo) => (
+        incompleteTodos.map((todo) => (
+          <TodoListItem
+            todo={todo}
+            onRemovePressed={onRemovePressed}
+            onCompletedPressed={onCompletedPressed}
+          />
+        ))
+      }
+      <h3>Completed:</h3>
+      {
+        // Map through each todo item in the completedTodos property.
+        // Pass each todo item into the TodoListItem component
+        // through the components' todo property.
+        completedTodos.map((todo) => (
           <TodoListItem
             todo={todo}
             onRemovePressed={onRemovePressed}
@@ -64,8 +83,10 @@ const TodoList = ({
 const mapStateToProps = (state) => ({
   // Call the getTodosLoading selector, pass state object in as argument.
   isLoading: getTodosLoading(state),
-  // Call the getTodos selector, pass state object in as argument.
-  todos: getTodos(state),
+  // Call the completedTodos selector, pass state object in as argument.
+  completedTodos: getCompletedTodos(state),
+  // Call the incompleteTodos selector, pass state object in as argument.
+  incompleteTodos: getIncompleteTodos(state),
 });
 
 // The dispatch argument is a function that allows the components to trigger
