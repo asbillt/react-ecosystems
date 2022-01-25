@@ -18,6 +18,7 @@ import {
   LOAD_TODOS_FAILURE,
 } from "./actions";
 
+// Define the initial state of the app.
 const initialState = { isLoading: false, data: [] };
 
 // Create the todos reducer.
@@ -52,7 +53,7 @@ export const todos = (state = initialState, action) => {
     case MARK_TODO_AS_COMPLETED: {
       // Destructure the todo from the payload property and rename it updatedTodo.
       const { todo: updatedTodo } = payload;
-      // Map through the state array.
+      // Map through the state.data array.
       // For each todo item, check if the id of each todo item is the same
       // as the id of the updated todo item and if it is return the updated todo.
       // Otherwise return the same state of todo.
@@ -66,22 +67,30 @@ export const todos = (state = initialState, action) => {
         }),
       };
     }
+    // Use the LOAD_TODOS_SUCCESS case when the action type is LOAD_TODOS_SUCCESS.
     // This case will load the todos list from the node server.
     case LOAD_TODOS_SUCCESS: {
+      // Destructure the todo from the payload property.
       const { todos } = payload;
       return {
+        // Return the updated state, where isLoading is set to false
+        // and data is the todos that were loaded successfully.
         ...state,
         isLoading: false,
         data: todos,
       };
     }
+    // Use the LOAD_TODOS_IN_PROGRESS case when the action type is LOAD_TODOS_IN_PROGRESS.
     case LOAD_TODOS_IN_PROGRESS:
       return {
+        // Return the updated state, where isLoading is set to true.
         ...state,
         isLoading: true,
       };
+    // Use the LOAD_TODOS_FAILURE case when the action type is LOAD_TODOS_FAILURE.
     case LOAD_TODOS_FAILURE:
       return {
+        // Return the updated state, where isLoading is set to false.
         ...state,
         isLoading: false,
       };
