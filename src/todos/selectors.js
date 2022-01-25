@@ -1,10 +1,10 @@
 /*  
-    The structure of the state object:
+  The structure of the state object:
     {
-        todos: {
-            isLoading: false or true,
-            data: [an array of the todos list]
-        }
+      todos: {
+        isLoading: false or true,
+        data: [an array of the todos list]
+      }
     }
 */
 
