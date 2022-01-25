@@ -26,16 +26,12 @@ A React Redux Application built to keep track of incomplete and completed todo i
 ├── src
 │   ├── todos
 │   │   ├── action.js
-│   │   ├── NewTodoForm.css
 │   │   ├── NewTodoForm.js
 │   │   ├── reducers.js
 │   │   ├── selectors.js
 │   │   ├── thunks.js
-│   │   ├── TodoList.css
 │   │   ├── TodoList.js
-│   │   ├── TodoListItem.css
 │   │   └── TodoListItem.js
-│   ├── App.css
 │   ├── App.js
 │   ├── index.js
 │   └── store.js
