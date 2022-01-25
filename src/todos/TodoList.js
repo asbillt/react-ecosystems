@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 // Import connect from the react-redux package.
 // The connect function connects a React component to a Redux store.
 import { connect } from "react-redux";
+// Import styled-components library.
+import styled from "styled-components";
 // Import the NewTodoForm component from NewTodoForm.js.
 import NewTodoForm from "./NewTodoForm";
 // Import the TodoListItem component from TodoListItem.js.
@@ -19,8 +21,11 @@ import {
   removeTodoRequest,
   markTodoAsCompletedRequest,
 } from "./thunks";
-// Import styling.
-import "./TodoList.css";
+
+const ListWrapper = styled.div`
+  max-width: 700px;
+  margin: auto;
+`;
 
 // Create TodoList component.
 // Destructure the completedTodos, incompleteTodos, onRemovePressed, onCompletedPressed, isLoading and startLoadingTodos properties.
@@ -41,7 +46,7 @@ const TodoList = ({
   // Display the "Loading todos..." message while the app is loading the todos.
   const loadingMessage = <div>Loading todos...</div>;
   const content = (
-    <div className="list-wrapper">
+    <ListWrapper>
       <NewTodoForm />
       <h3>Incomplete:</h3>
       {
@@ -69,7 +74,7 @@ const TodoList = ({
           />
         ))
       }
-    </div>
+    </ListWrapper>
   );
   // If isLoading is true return loadingMessage otherwise return content.
   return isLoading ? loadingMessage : content;

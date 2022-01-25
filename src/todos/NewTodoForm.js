@@ -4,12 +4,41 @@ import React, { useState } from "react";
 // Import connect from the react-redux package.
 // The connect function connects a React component to a Redux store.
 import { connect } from "react-redux";
+// Import styled-components library.
+import styled from "styled-components";
 // Import selector.
 import { getTodos } from "./selectors";
 // Import addTodoRequest from thunks.js.
 import { addTodoRequest } from "./thunks";
-// Import styling.
-import "./NewTodoForm.css";
+
+const FormContainer = styled.div`
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px grey;
+`;
+
+const NewTodoInput = styled.input`
+  font-size: 16px;
+  padding: 8px;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  border-radius: 8px;
+  width: 70%;
+  outline: none;
+`;
+
+const NewTodoButton = styled.button`
+  font-size: 16px;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  margin-left: 8px;
+  width: 20%;
+  background-color: #22ee22;
+`;
 
 // Create NewTodoForm component.
 // Pass in the todos property from mapStateToProps.
@@ -21,8 +50,8 @@ const NewTodoForm = ({ todos, onCreatePressed }) => {
   const [inputValue, setInputValue] = useState("");
   return (
     // Return the todo form.
-    <div className="new-todo-form">
-      <input
+    <FormContainer>
+      <NewTodoInput
         // Initial value is set to inputValue.
         // As user starts typing value for input, call the setInputValue function
         // and pass the event as a parameter to update the state of inputValue.
@@ -32,7 +61,7 @@ const NewTodoForm = ({ todos, onCreatePressed }) => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button
+      <NewTodoButton
         onClick={() => {
           // When a user clicks the Create Todo button, check if the
           // inputValue that the user is typing (the new todo) is equal to
@@ -52,8 +81,8 @@ const NewTodoForm = ({ todos, onCreatePressed }) => {
         className="new-todo-button"
       >
         Create Todo
-      </button>
-    </div>
+      </NewTodoButton>
+    </FormContainer>
   );
 };
 
