@@ -7,8 +7,6 @@ import { hot } from "react-hot-loader";
 import styled from "styled-components";
 // Import the TodoList component.
 import TodoList from "./todos/TodoList";
-// Import the styling from App.css.
-import "./App.css";
 
 const AppContainer = styled.div`
   margin: 1rem;
@@ -21,9 +19,7 @@ const AppContainer = styled.div`
 const App = () => {
   return (
     <AppContainer>
-      <h1>
-        <TodoList />
-      </h1>
+      <TodoList />
     </AppContainer>
   );
 };
