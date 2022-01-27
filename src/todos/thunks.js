@@ -19,7 +19,7 @@ import {
 // Two arguments passed to async function when loadTodos thunk is triggered.
 // dispatch: Used to dispatch other redux actions from inside the loadTodos thunk.
 // getState: Function used to get access to the current state of the redux store.
-export const loadTodos = () => async (dispatch, getState) => {
+export const loadTodos = () => async (dispatch) => {
   // Use a try catch block to handle any cases where the fetching doesn't work.
   // Any errors during the fetch operation are passed into the catch block.
   try {
