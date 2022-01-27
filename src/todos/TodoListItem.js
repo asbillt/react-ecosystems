@@ -12,13 +12,19 @@ const TodoItemContainer = styled.div`
   box-shadow: 0 4px 8px grey;
 `;
 
-// If the createdAt date for the incomplete todo is greater than 5 days old from todays date
-// then display a red bottom border otherwise display no red bottom border.
+// Creates function with the logic from TodoItemContainerWithWarning
+// in order to test that logic in TodoListItem.test.js.
+export const getBorderStyleForDate = (startingDate, currentDate) => {
+  // If the createdAt date for the incomplete todo is greater than 5 days old from todays date
+  // then display a red bottom border otherwise display no red bottom border.
+  return startingDate > new Date(currentDate - 86400000 * 5)
+    ? "none"
+    : "2px solid red";
+};
+
 const TodoItemContainerWithWarning = styled(TodoItemContainer)`
   border-bottom: ${(props) =>
-    new Date(props.createdAt) > new Date(Date.now() - 86400000 * 5)
-      ? "none"
-      : "2px solid red"};
+    getBorderStyleForDate(new Date(props.createdAt), Date.now())};
 `;
 
 const ButtonsContainer = styled.div`
